@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>123124124214</h1>
+  <div class="home">
+    
   </div>
 </template>
 <script>
