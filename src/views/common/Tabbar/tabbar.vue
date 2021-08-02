@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="active" route class="nav">
+  <van-tabbar v-model="active" route class="nav" placeholder>
     <van-tabbar-item
       class="nav_item"
       v-for="item in menu"
