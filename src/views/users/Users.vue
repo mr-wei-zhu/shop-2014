@@ -1,0 +1,186 @@
+<template>
+  <div id="users">
+    <!-- 登录注册 -->
+    <div class="UserHead">
+      <!-- 头像 -->
+      <div class="via">
+        <img src="~assets/img/user/enter.svg" alt="头像" />
+      </div>
+      <!-- 登录注册按钮 -->
+      <div class="phone">
+        <div class="phoneup">
+          <span class="login" @click="login">登录/</span>
+          <span class="sinin">注册</span>
+        </div>
+        <div class="phonedowm">
+          <img src="~assets/img/user/phone.svg" alt="手机" />
+          <span>暂无绑定手机号</span>
+        </div>
+      </div>
+    </div>
+    <!-- 钱包 -->
+    <section class="account">
+      <div class="account-item">
+        <div class="number"><span class="balance">0.00</span>元</div>
+        <div class="account-info">我的余额</div>
+      </div>
+      <div class="account-item">
+        <div class="number"><span class="balance">0</span>个</div>
+        <div class="account-info">我的优惠券</div>
+      </div>
+      <div class="account-item">
+        <div class="number"><span class="balance">0</span>分</div>
+        <div class="account-info">我的积分</div>
+      </div>
+    </section>
+
+    <!-- 列表 -->
+    <div class="userlistbox">
+      <van-list class="userlist">
+        <img src="~assets/img/user/xiaoxi.svg" alt="" />
+        <span>我的消息</span>
+      </van-list>
+      <van-list class="userlist">
+        <img src="~assets/img/user/xiaoxi.svg" alt="" />
+        <span>积分商城</span>
+      </van-list>
+      <van-list class="userlist">
+        <img src="~assets/img/user/xiaoxi.svg" alt="" />
+        <span>开通会员</span>
+      </van-list>
+
+       <div class="set">
+        <div class="setIn">
+            <img src="~assets/img/user/shezhi.svg" alt="">
+            <span>设置</span>
+        </div>
+        <div class="setIn">
+            <img src="~assets/img/user/guanyu.svg" alt="">
+            <span>关于</span>
+        </div>
+    </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: [],
+  components: {},
+  name: "",
+  data() {
+    return {
+      list: [],
+    };
+  },
+  //方法 函数写这里
+  methods: {
+    login(){
+    
+       this.$router.push("/login");
+    }
+
+
+  },
+  
+};
+</script>
+<style scoped>
+
+.UserHead {
+  height: 77px;
+  background: #ff8198;
+  padding: 7px 0 14px 7px;
+  display: flex;
+  align-content: center;
+  /* justify-content: center; */
+}
+.via img {
+  width: 100%;
+  height: 100%;
+}
+.phone {
+  color: #fff;
+  padding-left: 15px;
+  padding-top: 12px;
+  font-size: 17px;
+}
+
+.phone img {
+  width: 12%;
+  height: 12%;
+}
+.phonedowm {
+  padding-top: 4px;
+}
+
+.profileTop {
+  background-color: #ff8198;
+  color: #fff;
+
+  box-shadow: 0 2px 1px rgba(100, 100, 100, 0.05);
+}
+
+.account {
+  display: flex;
+  padding: 8px 0 0 0;
+}
+
+.account :last-child {
+  border-right: solid 1px #fff;
+}
+
+.account-item {
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  border-right: solid 1px #f2f2f2;
+  color: #666;
+}
+
+.account-item .balance {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff5f3e;
+}
+
+.account-info {
+  margin-top: 6px;
+}
+
+/* 列表 */
+.userlistbox {
+  padding: 8px 5px 0 5px;
+  border-top: solid 5px #f2f2f2;
+  /* margin-top: 3px; */
+}
+.userlist {
+  background: #fff;
+  border-bottom: 2px solid rgb(248, 248, 248);
+  padding: 0 5px 4px 10px;
+}
+.userlistbox img {
+  width: 8%;
+  height: 8%;
+  margin-top: 15px;
+}
+.userlist span {
+  position: absolute;
+  margin: 17px 0 0 20px;
+  color: rgb(212, 0, 159);
+  font-weight: 900;
+}
+.set {
+        margin-top: 16px;
+    }
+    .setIn {
+        position: relative;
+        padding: 0 5px 2px 10px;
+        border-bottom: solid 2px #f2f2f2;
+    }
+    .setIn span{
+        position: absolute;
+        margin: 20px 0 0 20px;
+    }
+</style>
