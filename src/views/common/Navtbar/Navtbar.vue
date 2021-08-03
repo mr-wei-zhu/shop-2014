@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar left-arrow class="navbar" fixed placeholder z-index='999'>
+  <van-nav-bar left-arrow class="navbar" fixed placeholder z-index="999">
     <template #left>
       <slot name="left"></slot>
     </template>
@@ -33,8 +33,16 @@ export default {
   computed: {},
 };
 </script>
-<style  scoped>
-.navbar{
-    height: 40px;
+<style >
+.navbar {
+  height: 40px;
+}
+.van-nav-bar__title {
+  color: #fff;
+}
+.van-nav-bar__content {
+  height: 40px;
+  border: none;
+  background: pink;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div id="users">
+    <Navbar id="navbar">
+      <template v-slot:title>购物街</template>
+    </Navbar>
     <!-- 登录注册 -->
     <div class="UserHead">
       <!-- 头像 -->
@@ -49,23 +52,24 @@
         <span>开通会员</span>
       </van-list>
 
-       <div class="set">
+      <div class="set">
         <div class="setIn">
-            <img src="~assets/img/user/shezhi.svg" alt="">
-            <span>设置</span>
+          <img src="~assets/img/user/shezhi.svg" alt="" />
+          <span>设置</span>
         </div>
         <div class="setIn">
-            <img src="~assets/img/user/guanyu.svg" alt="">
-            <span>关于</span>
+          <img src="~assets/img/user/guanyu.svg" alt="" />
+          <span>关于</span>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import Navbar from "../common/Navtbar/Navtbar.vue";
 export default {
   props: [],
-  components: {},
+  components: { Navbar },
   name: "",
   data() {
     return {
@@ -74,18 +78,16 @@ export default {
   },
   //方法 函数写这里
   methods: {
-    login(){
-    
-       this.$router.push("/login");
-    }
-
-
+    login() {
+      this.$router.push("/login");
+    },
   },
-  
 };
 </script>
 <style scoped>
-
+#navbar {
+  background: pink;
+}
 .UserHead {
   height: 77px;
   background: #ff8198;
@@ -172,15 +174,15 @@ export default {
   font-weight: 900;
 }
 .set {
-        margin-top: 16px;
-    }
-    .setIn {
-        position: relative;
-        padding: 0 5px 2px 10px;
-        border-bottom: solid 2px #f2f2f2;
-    }
-    .setIn span{
-        position: absolute;
-        margin: 20px 0 0 20px;
-    }
+  margin-top: 16px;
+}
+.setIn {
+  position: relative;
+  padding: 0 5px 2px 10px;
+  border-bottom: solid 2px #f2f2f2;
+}
+.setIn span {
+  position: absolute;
+  margin: 20px 0 0 20px;
+}
 </style>
