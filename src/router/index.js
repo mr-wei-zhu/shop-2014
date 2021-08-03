@@ -67,7 +67,6 @@ const routes = [
   },
   {
     // vip
-<<<<<<< HEAD
     path:'/vip',
     component:Vip
   },
@@ -75,10 +74,6 @@ const routes = [
     // 购物车
     path:'/cart',
     component:Cart
-=======
-    path: '/vip',
-    component: Vip
->>>>>>> 87a99dc03bd45c014526c6223e10c314f55951a5
   }
 
 ]
