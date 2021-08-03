@@ -1,21 +1,20 @@
 <template>
-  <div id="login">
+  <div id="sigin">
     <van-form
       @submit="onSubmit"
-      class="loginuser"
-      :rules="loginFormRules"
-      :model="loginForm"
-      ref="loginFormRef"
+      class="siginuser"
+      :rules="siginFormRules"
+      :model="siginForm"
+      ref="siginFormRef"
     >
       <van-field
-        v-model="loginForm.username"
+        v-model="siginForm.username"
         name="用户名"
         label="用户名"
         placeholder="用户名"
-      
       />
       <van-field
-        v-model="loginForm.password"
+        v-model="siginForm.password"
         type="password"
         name="密码"
         label="密码"
@@ -27,26 +26,26 @@
           block
           type="default"
           native-type="submit"
-          class="loginput"
-          @click="login"
-          >登录</van-button
+          class="siginput"
+          @click="sigin"
+          >注册</van-button
         >
       </div>
     </van-form>
-    <p @click="sigin">没有账户？快来注册吧</p>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       // 默认值
-      loginForm: {
-        username: "迪迪",
-        password: "123456",
+      siginForm: {
+        username: "",
+        password: "",
       },
       // 验证规则
-       loginFormRules: {
+      siginFormRules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
@@ -69,43 +68,40 @@ export default {
     };
   },
   methods: {
-    onSubmit(values) {
-      console.log("submit", values);
+    onsubmit(values) {
+      console.log(1);
     },
-    login(){
-      this.$refs.loginFormRef.values(async(val)=>{
-        if(!val)return;
-        this.$http.login(this.loginForm,(res)=>{
-          if(res.meat.status != 200){
-          Notify('登录失败');
-          return;
+    sigin() {
+      this.$refs.siginFormRules.values(async (val) => {
+        if (!val) return;
+        this.$http.sigin(this.siginForm, (res) => {
+          if (res.meat.status != 200) {
+            Notify("注册失败");
+            return;
           }
-          Notify({ type: 'primary', message: '登录成功' });
-          window.sessionStorage.setItem('token',res.data.token);
+          Notify({ type: "primary", message: "注册成功" });
+          window.sessionStorage.setItem("token", res.data.token);
           this.$router.push("/home");
-        })
-      })
+        });
+      });
     },
-    sigin(){
-      this.$router.push("/sigin")
-    }
   },
 };
 </script>
-<style >
 
-#login {
+<style>
+#sigin {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
-  background: url("https://z3.ax1x.com/2021/08/02/fCP3yq.gif") no-repeat;
+  background: url("https://z3.ax1x.com/2021/08/02/fCwEjJ.jpg") no-repeat;
   background-size: 100% 100%;
 }
-.loginuser {
+.siginuser {
   margin-top: 140px;
   opacity:0.5;
 }
-.loginput {
+.siginput {
   color: #fff;
   background: rgb(44, 94, 233);
 }

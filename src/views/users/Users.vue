@@ -13,7 +13,7 @@
       <div class="phone">
         <div class="phoneup">
           <span class="login" @click="login">登录/</span>
-          <span class="sinin">注册</span>
+          <span class="sinin" @click="sigin">注册</span>
         </div>
         <div class="phonedowm">
           <img src="~assets/img/user/phone.svg" alt="手机" />
@@ -39,37 +39,42 @@
 
     <!-- 列表 -->
     <div class="userlistbox">
-      <van-list class="userlist">
+      <van-list class="userlist" @click="info">
         <img src="~assets/img/user/xiaoxi.svg" alt="" />
         <span>我的消息</span>
       </van-list>
-      <van-list class="userlist">
-        <img src="~assets/img/user/xiaoxi.svg" alt="" />
+      <van-list class="userlist" @click="shop">
+        <img src="~assets/img/user/shangcheng.svg" alt="" />
         <span>积分商城</span>
       </van-list>
-      <van-list class="userlist">
-        <img src="~assets/img/user/xiaoxi.svg" alt="" />
+      <van-list class="userlist" @click="vip">
+        <img src="~assets/img/user/huiyuan.svg" alt="" />
         <span>开通会员</span>
       </van-list>
 
-      <div class="set">
+       <div class="set" @click="set"> 
         <div class="setIn">
-          <img src="~assets/img/user/shezhi.svg" alt="" />
-          <span>设置</span>
+            <img src="~assets/img/user/shezhi.svg" alt="">
+            <span>设置</span>
         </div>
         <div class="setIn">
-          <img src="~assets/img/user/guanyu.svg" alt="" />
-          <span>关于</span>
+            <img src="~assets/img/user/guanyu.svg" alt="">
+            <span>关于</span>
         </div>
-      </div>
     </div>
+    </div>
+    <tabbar></tabbar>
+
   </div>
 </template>
+
 <script>
+
 import Navbar from "../common/Navtbar/Navtbar.vue";
+import Tabbar from '../common/Tabbar/tabbar.vue';
 export default {
   props: [],
-  components: { Navbar },
+  components: { Navbar, Tabbar },
   name: "",
   data() {
     return {
@@ -81,9 +86,26 @@ export default {
     login() {
       this.$router.push("/login");
     },
+    sigin(){
+      this.$router.push("/sigin");
+    },
+    info(){
+      this.$router.push("/info")
+    },
+    set(){
+this.$router.push('/set')
+    },
+    shop(){
+      this.$router.push('/shop')
+    },
+    vip(){
+      this.$router.push('vip')
+    }
   },
 };
 </script>
+
+
 <style scoped>
 #navbar {
   background: pink;
@@ -102,17 +124,21 @@ export default {
 }
 .phone {
   color: #fff;
-  padding-left: 15px;
+  padding-left: 14px;
   padding-top: 12px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .phone img {
-  width: 12%;
-  height: 12%;
+width: 22px;
+height: 24px;
+vertical-align: bottom;
 }
 .phonedowm {
   padding-top: 4px;
+}
+.phone{
+  text-align: center;
 }
 
 .profileTop {
@@ -135,7 +161,7 @@ export default {
   width: 100%;
   background-color: #fff;
   text-align: center;
-  font-size: 14px;
+  font-size: .18667rem;
   padding: 20px;
   border-right: solid 1px #f2f2f2;
   color: #666;
@@ -170,19 +196,19 @@ export default {
 .userlist span {
   position: absolute;
   margin: 17px 0 0 20px;
-  color: rgb(212, 0, 159);
+  color: rgb(100, 0, 92);
   font-weight: 900;
 }
 .set {
-  margin-top: 16px;
-}
-.setIn {
-  position: relative;
-  padding: 0 5px 2px 10px;
-  border-bottom: solid 2px #f2f2f2;
-}
-.setIn span {
-  position: absolute;
-  margin: 20px 0 0 20px;
-}
+        margin-top: 16px;
+    }
+    .setIn {
+        position: relative;
+        padding: 0 5px 2px 10px;
+        border-bottom: solid 2px #f2f2f2;
+    }
+    .setIn span{
+        position: absolute;
+        margin: 20px 0 0 20px;
+    }
 </style>
