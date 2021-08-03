@@ -6,9 +6,10 @@ const Login = () => import('../views/login/Login.vue')
 const Sigin = () => import('../views/sigin/Sigin.vue')
 const Category = () => import('../views/classify/Category.vue')
 const Info = () => import('../views/info/Info.vue')
-const Set = () =>import('../views/set/Set.vue')
-const Shop = () =>import('../views/shop/Shop.vue')
-const Vip = () =>import('../views/vip/Vip.vue')
+const Set = () => import('../views/set/Set.vue')
+const Shop = () => import('../views/shop/Shop.vue')
+const Vip = () => import('../views/vip/Vip.vue')
+const detail = () => import('../views/Detail/detail.vue')
 
 
 
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/home',
     component: Home
+  },
+  {
+    path: '/detail/:id',
+    component: detail
   },
   {
     // 我的
@@ -59,10 +64,10 @@ const routes = [
   },
   {
     // vip
-    path:'/vip',
-    component:Vip
+    path: '/vip',
+    component: Vip
   }
- 
+
 ]
 const router = createRouter({
   history: createWebHistory(),
