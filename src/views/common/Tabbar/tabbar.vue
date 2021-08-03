@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="active" route class="nav">
+  <van-tabbar v-model="active" route class="nav" placeholder>
     <van-tabbar-item
       class="nav_item"
       v-for="item in menu"
@@ -20,7 +20,7 @@ export default {
         { path: "/home", text: "首页", icon: "wap-home-o" },
         { path: "/Category", text: "热卖", icon: "hot-o" },
         { path: "/cart", text: "购物车", icon: "cart-o" },
-        { path: "/Profile", text: "我的", icon: "user-o" },
+        { path: "/users", text: "我的", icon: "user-o" },
       ],
     };
   },

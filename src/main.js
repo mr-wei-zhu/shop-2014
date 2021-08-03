@@ -6,7 +6,13 @@ import 'vant/lib/index.css';
 import router from './router/index'
 import vant from 'vant';
 
+// import https from './network/request'
+
+
+
 const app = createApp(App)
+// app.prototype.$http = https;
+
 app.use(Button);
 app.use(router)
 app.use(vant)

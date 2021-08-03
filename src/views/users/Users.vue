@@ -1,5 +1,8 @@
 <template>
   <div id="users">
+    <Navbar id="navbar">
+      <template v-slot:title>购物街</template>
+    </Navbar>
     <!-- 登录注册 -->
     <div class="UserHead">
       <!-- 头像 -->
@@ -63,9 +66,10 @@
   </div>
 </template>
 <script>
+import Navbar from "../common/Navtbar/Navtbar.vue";
 export default {
   props: [],
-  components: {},
+  components: { Navbar },
   name: "",
   data() {
     return {
@@ -74,18 +78,16 @@ export default {
   },
   //方法 函数写这里
   methods: {
-    login(){
-    
-       this.$router.push("/login");
-    }
-
-
+    login() {
+      this.$router.push("/login");
+    },
   },
-  
 };
 </script>
 <style scoped>
-
+#navbar {
+  background: pink;
+}
 .UserHead {
   height: 77px;
   background: #ff8198;
