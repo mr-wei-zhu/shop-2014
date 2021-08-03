@@ -5,12 +5,13 @@ import { Button } from 'vant';
 import 'vant/lib/index.css';
 import router from './router/index'
 import vant from 'vant';
+// import rem from './assets/js/rem.js'
 
-// import https from './network/request'
 
 
 
 const app = createApp(App)
+// app.use(rem)
 // app.prototype.$http = https;
 
 app.use(Button);
