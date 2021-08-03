@@ -18,7 +18,7 @@ export default {
       active: 0,
       menu: [
         { path: "/home", text: "首页", icon: "wap-home-o" },
-        { path: "/Category", text: "热卖", icon: "hot-o" },
+        { path: "/classify", text: "热卖", icon: "hot-o" },
         { path: "/cart", text: "购物车", icon: "cart-o" },
         { path: "/users", text: "我的", icon: "user-o" },
       ],

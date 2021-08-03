@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const Home = () => import('../views/home/Home.vue')
 const Users = () => import('../views/users/Users.vue')
 const Login = () => import('../views/login/Login.vue')
+const Category = () => import('../views/classify/Category.vue')
 
 
 
@@ -23,6 +24,10 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/classify',
+    component: Category
   },
 ]
 const router = createRouter({
