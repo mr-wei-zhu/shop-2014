@@ -12,7 +12,7 @@ const Category = () => import('../views/classify/Category.vue')
 const routes = [
   {
     path: '/',
-    redirect: '/users'
+    redirect: '/home'
   },
   {
     path: '/home',
