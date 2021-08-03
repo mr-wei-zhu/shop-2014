@@ -19,12 +19,10 @@ const routes = [
   {
     path: '/users',
     component: Users
-
   },
   {
     path: '/login',
     component: Login
-
   },
 ]
 const router = createRouter({
