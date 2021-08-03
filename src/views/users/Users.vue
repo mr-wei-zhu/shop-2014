@@ -63,15 +63,18 @@
         </div>
     </div>
     </div>
+    <tabbar></tabbar>
+
   </div>
 </template>
 
 <script>
 
 import Navbar from "../common/Navtbar/Navtbar.vue";
+import Tabbar from '../common/Tabbar/tabbar.vue';
 export default {
   props: [],
-  components: { Navbar },
+  components: { Navbar, Tabbar },
   name: "",
   data() {
     return {

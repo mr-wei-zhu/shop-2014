@@ -28,16 +28,19 @@
     </van-grid>
 
     <home-main></home-main>
+    <tabbar></tabbar>
   </div>
 </template>
 <script>
+import Tabbar from "views/common/Tabbar/tabbar.vue";
+
 import Navbar from "views/common/Navtbar/Navtbar.vue";
 import axios from "axios";
 import HomeSwiper from "../common/swiper/home-swiper.vue";
 import HomeMain from "./HomeMain.vue";
 export default {
   props: [],
-  components: { Navbar, HomeSwiper, HomeMain },
+  components: { Navbar, HomeSwiper, HomeMain, Tabbar },
   name: "",
   data() {
     return {
