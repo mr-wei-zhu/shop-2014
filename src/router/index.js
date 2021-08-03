@@ -8,7 +8,7 @@ const Category = () => import('../views/classify/Category.vue')
 const Info = () => import('../views/info/Info.vue')
 
 
-const Cart = () =>import('../views/cart/Cart.vue')
+const Cart = () =>import('../views/cart/cart.vue')
 const Set = () => import('../views/set/Set.vue')
 const Shop = () => import('../views/shop/Shop.vue')
 const Vip = () => import('../views/vip/Vip.vue')
