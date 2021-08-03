@@ -114,9 +114,6 @@ export default {
 .van-nav-bar::after {
   bottom: 100%;
 }
-.nav {
-  /* border-radius: 50% ; */
-}
 .nav .nva_div {
   border-radius: 50%;
   overflow: hidden;
