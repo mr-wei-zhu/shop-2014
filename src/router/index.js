@@ -9,7 +9,7 @@ const Info = () => import('../views/info/Info.vue')
 const Set = () =>import('../views/set/Set.vue')
 const Shop = () =>import('../views/shop/Shop.vue')
 const Vip = () =>import('../views/vip/Vip.vue')
-
+const Cart = () =>import('../views/cart/Cart.vue')
 
 
 const routes = [
@@ -61,6 +61,11 @@ const routes = [
     // vip
     path:'/vip',
     component:Vip
+  },
+  {
+    // 购物车
+    path:'/cart',
+    component:Cart
   }
  
 ]
