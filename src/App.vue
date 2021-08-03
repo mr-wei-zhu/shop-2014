@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <tabbar></tabbar>
+    <keep-alive exclude="Detail">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import Tabbar from "views/common/Tabbar/tabbar.vue";
 export default {
   name: "App",
-  components: { Tabbar },
+  components: {},
 };
 </script>
 <style>
-
 </style>
