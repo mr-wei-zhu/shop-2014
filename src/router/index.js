@@ -8,7 +8,7 @@ const Category = () => import('../views/classify/Category.vue')
 const Info = () => import('../views/info/Info.vue')
 
 
-const Cart = () =>import('../views/cart/Cart.vue')
+const Cart = () => import('../views/cart/cart.vue')
 const Set = () => import('../views/set/Set.vue')
 const Shop = () => import('../views/shop/Shop.vue')
 const Vip = () => import('../views/vip/Vip.vue')
@@ -46,6 +46,7 @@ const routes = [
     path: '/sigin',
     component: Sigin
   },
+    // 分类
   {
     path: '/classify',
     component: Category
@@ -67,13 +68,13 @@ const routes = [
   },
   {
     // vip
-    path:'/vip',
-    component:Vip
+    path: '/vip',
+    component: Vip
   },
   {
     // 购物车
-    path:'/cart',
-    component:Cart
+    path: '/cart',
+    component: Cart
   }
 
 ]
