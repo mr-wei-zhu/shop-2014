@@ -1,6 +1,9 @@
 <template>
   <div id="cart">
     <!-- 头部 -->
+    <navtbar id="navbar">
+      <template v-slot:title>购物车</template>
+    </navtbar>
     <div class="carthead">
       <div class="cart-head-up">
         <strong>购物车</strong><span @click="Regulate">管理</span>
@@ -11,7 +14,6 @@
     </div>
     <!-- 购物车中心部分 -->
     <van-swipe-cell class="cartkist">
-      <van-checkbox v-model="checked" class="cart-checkboox"></van-checkbox>
       <van-card
         num="2"
         price="2.00"
@@ -20,15 +22,82 @@
         class="goods-card"
         thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
       />
-
+      <template #tags>
+        <van-tag plain type="danger">标签</van-tag>
+        <van-tag plain type="danger">标签</van-tag>
+      </template>
       <template #right>
         <van-button square text="删除" type="danger" class="delete-button" />
       </template>
     </van-swipe-cell>
-
-  
-      
-  
+    <van-swipe-cell class="cartkist">
+      <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        class="goods-card"
+        thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
+      />
+      <template #tags>
+        <van-tag plain type="danger">标签</van-tag>
+        <van-tag plain type="danger">标签</van-tag>
+      </template>
+      <template #right>
+        <van-button square text="删除" type="danger" class="delete-button" />
+      </template>
+    </van-swipe-cell>
+    <van-swipe-cell class="cartkist">
+      <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        class="goods-card"
+        thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
+      />
+      <template #tags>
+        <van-tag plain type="danger">标签</van-tag>
+        <van-tag plain type="danger">标签</van-tag>
+      </template>
+      <template #right>
+        <van-button square text="删除" type="danger" class="delete-button" />
+      </template>
+    </van-swipe-cell>
+    <van-swipe-cell class="cartkist">
+      <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        class="goods-card"
+        thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
+      />
+      <template #tags>
+        <van-tag plain type="danger">标签</van-tag>
+        <van-tag plain type="danger">标签</van-tag>
+      </template>
+      <template #right>
+        <van-button square text="删除" type="danger" class="delete-button" />
+      </template>
+    </van-swipe-cell>
+    <van-swipe-cell class="cartkist">
+      <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        class="goods-card"
+        thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
+      />
+      <template #tags>
+        <van-tag plain type="danger">标签</van-tag>
+        <van-tag plain type="danger">标签</van-tag>
+      </template>
+      <template #right>
+        <van-button square text="删除" type="danger" class="delete-button" />
+      </template>
+    </van-swipe-cell>
     <!-- 结算 -->
     <div class="pay">
       <van-checkbox v-model="checked">全选</van-checkbox>
@@ -72,8 +141,7 @@ export default {
   padding: 0;
 }
 #cart {
-  padding: 0 7px;
-  /* width: 100vw; */
+  width: 100vw;
   height: 90vh;
   background: rgb(243, 243, 243);
 }
@@ -110,10 +178,8 @@ strong {
   height: 100%;
 }
 .cartkist {
-  background: white;
   border-radius: 17px;
   margin-bottom: 12px;
-  position: relative;
 }
 
 button {
@@ -141,14 +207,5 @@ button {
 }
 .pay-buttom {
   width: 107px;
-}
-.cart-checkboox {
-  position: absolute;
-  left: 6px;
-  top: 40%;
-  z-index: 1;
-}
-.van-card__header{
-  padding-left: 14px;
 }
 </style>

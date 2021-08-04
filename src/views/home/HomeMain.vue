@@ -134,7 +134,7 @@ export default {
   },
 };
 </script>
-<style  >
+<style scoped>
 .van-badge__wrapper {
   color: pink;
 }
