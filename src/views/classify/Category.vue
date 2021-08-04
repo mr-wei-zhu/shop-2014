@@ -1,9 +1,8 @@
 <template>
   <div>
-    <!-- 吸顶 -->
-    <van-sticky :offset-top="0">
-      <van-button type="primary">分类</van-button>
-    </van-sticky>
+    <Navtbar id="navbar">
+      <template v-slot:title>分类热卖</template>
+    </Navtbar>
 
     <van-tree-select
       :items="items"
@@ -85,6 +84,9 @@ export default {
 </script>
 
 <style>
+#navbar {
+  background: pink;
+}
 .van-button {
   width: 100%;
   background-color: rgb(248, 135, 154);

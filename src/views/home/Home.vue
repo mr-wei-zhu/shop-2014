@@ -90,7 +90,7 @@ export default {
   computed: {},
 };
 </script>
-<style>
+<style scoped>
 /* @import url("~assets/css/Home/dist/home.css");
  */
 #navbar {

@@ -1,6 +1,9 @@
 <template>
   <div id="cart">
-      <!-- 头部 -->
+    <!-- 头部 -->
+    <navtbar id="navbar">
+      <template v-slot:title>购物车</template>
+    </navtbar>
     <div class="carthead">
       <div class="cart-head-up">
         <strong>购物车</strong><span @click="Regulate">管理</span>
@@ -102,15 +105,20 @@
         <p>
           合计：<span>￥{{ money }}</span>
         </p>
-        <van-button round type="info" color="#FF8040" class="pay-buttom">结算({{number}})</van-button>
+        <van-button round type="info" color="#FF8040" class="pay-buttom"
+          >结算({{ number }})</van-button
+        >
       </div>
     </div>
+    <tabbar></tabbar>
   </div>
 </template>
 <script>
+import Navtbar from "../common/Navtbar/Navtbar.vue";
+import Tabbar from "../common/Tabbar/tabbar.vue";
 export default {
   props: [],
-  components: {},
+  components: { Navtbar, Tabbar },
   name: "",
   data() {
     return {
@@ -137,8 +145,8 @@ export default {
   height: 90vh;
   background: rgb(243, 243, 243);
 }
-.number{
-    height: 100px;
+.number {
+  height: 100px;
 }
 .cart-head-up {
   height: 37px;
@@ -154,7 +162,6 @@ strong {
   padding-top: 5px;
   font-size: 17px;
   font-weight: 900;
- 
 }
 .cart-head-dowm {
   padding-top: 14px;
@@ -182,23 +189,23 @@ button {
 
   outline: none;
 }
-.pay{
-    width: 100%;
-    height: 46px;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    bottom:49px;
-    background: #fff;
+.pay {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 49px;
+  background: #fff;
 }
-.pay-number{
-    display: flex;
+.pay-number {
+  display: flex;
 }
-.pay-number p{
-    line-height: 46px;
-    padding-right: 6px;
+.pay-number p {
+  line-height: 46px;
+  padding-right: 6px;
 }
-.pay-buttom{
-    width: 107px;
+.pay-buttom {
+  width: 107px;
 }
 </style>
