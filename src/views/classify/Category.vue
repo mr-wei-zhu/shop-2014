@@ -33,6 +33,7 @@
 <script>
 import axios from "axios";
 import Tabbar from "../common/Tabbar/tabbar.vue";
+import Navtbar from "../common/Navtbar/Navtbar.vue"
 export default {
   data() {
     return {
@@ -43,7 +44,7 @@ export default {
       activeId: 3627,
     };
   },
-  components: { Tabbar },
+  components: { Tabbar,Navtbar },
   created() {
     // 获取左侧导航菜单的数据
     this.getClassifyMenu();
@@ -95,7 +96,7 @@ export default {
   font-size: 18px;
 }
 .van-tree-select {
-  height: 151vw !important;
+  height: 180vw !important;
   margin: 0;
 }
 .van-tree-select__nav {
