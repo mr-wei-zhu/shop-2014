@@ -1,14 +1,12 @@
 <template>
   <div>
-    <!-- 吸顶 -->
-    <van-sticky :offset-top="0">
-      <van-button type="primary">分类</van-button>
-    </van-sticky>
+    <Navtbar id="navbar">
+      <template v-slot:title>分类热卖</template>
+    </Navtbar>
 
     <van-tree-select
       :items="classifymenu"
       v-model:main-active-index="activeIndex"
-     
       @click="getClassifyList(activeIndex)"
     >
       <template #content>
@@ -24,11 +22,14 @@
         </van-grid>
       </template>
     </van-tree-select>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import tabbar from "../common/Tabbar/tabbar.vue";
+import Navtbar from "../common/Navtbar/Navtbar.vue";
 export default {
   data() {
     return {
@@ -38,6 +39,8 @@ export default {
       classifylist: [],
     };
   },
+  components: { tabbar, Navtbar },
+
   created() {
     this.getClassifyMenu();
   },
@@ -48,7 +51,7 @@ export default {
         this.classifymenu = res.data.data.category.list;
         this.classifymenu.forEach((item) => {
           item.text = item.title;
-          item.activeIndex=item.maitKey
+          item.activeIndex = item.maitKey;
         });
         console.log(this.classifymenu);
       });
@@ -68,6 +71,9 @@ export default {
 </script>
 
 <style>
+#navbar {
+  background: pink;
+}
 .van-button {
   width: 100%;
   background-color: rgb(248, 135, 154);

@@ -41,15 +41,15 @@
         >
       </div>
     </div>
-    
     <tabbar></tabbar>
   </div>
 </template>
 <script>
-import Tabbar from "views/common/Tabbar/tabbar.vue";
+import Navtbar from "../common/Navtbar/Navtbar.vue";
+import Tabbar from "../common/Tabbar/tabbar.vue";
 export default {
   props: [],
-  components: { Tabbar },
+  components: { Navtbar, Tabbar },
   name: "",
   data() {
     return {
