@@ -33,7 +33,7 @@
 <script>
 import axios from "axios";
 import Tabbar from "../common/Tabbar/tabbar.vue";
-import Navtbar from "../common/Navtbar/Navtbar.vue"
+import Navtbar from "../common/Navtbar/Navtbar.vue";
 export default {
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
       activeId: 3627,
     };
   },
-  components: { Tabbar,Navtbar },
+  components: { Tabbar, Navtbar },
   created() {
     // 获取左侧导航菜单的数据
     this.getClassifyMenu();
@@ -84,7 +84,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #navbar {
   background: pink;
 }
