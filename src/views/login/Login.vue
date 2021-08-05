@@ -98,12 +98,12 @@ export default {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
-  background: url("https://z3.ax1x.com/2021/08/02/fCP3yq.gif") no-repeat;
+  background: url("https://z3.ax1x.com/2021/08/04/fEqUK0.jpg") no-repeat;
   background-size: 100% 100%;
 }
 .loginuser {
   margin-top: 140px;
-  opacity:0.5;
+  /* opacity:0.5; */
 }
 .loginput {
   color: #fff;
@@ -111,7 +111,7 @@ export default {
 }
 p {
   font-size: 12px;
-  color: rgb(175, 175, 175);
+  color: #111;
   text-align: center;
 }
 .van-cell{

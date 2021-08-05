@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -67,23 +68,28 @@ export default {
       },
     };
   },
+
   methods: {
     onsubmit(values) {
       console.log(1);
     },
     sigin() {
-      this.$refs.siginFormRules.values(async (val) => {
-        if (!val) return;
-        this.$http.sigin(this.siginForm, (res) => {
-          if (res.meat.status != 200) {
-            Notify("注册失败");
-            return;
-          }
-          Notify({ type: "primary", message: "注册成功" });
-          window.sessionStorage.setItem("token", res.data.token);
-          this.$router.push("/home");
+      // this.$refs.siginFormRef.value(async (val) => {
+      //   if (!val) return;
+      console.log(this.siginForm);
+        axios.post("/api/addAction",{username:this.siginForm.username,password:this.siginForm.password}).then((res) => {
+          console.log(res);
         });
-      });
+        // this.$http.sigin(this.siginForm, (res) => {
+        //   if (res.meat.status != 200) {
+        //     Notify("注册失败");
+        //     return;
+        //   }
+        //   Notify({ type: "primary", message: "注册成功" });
+        //   window.sessionStorage.setItem("token", res.data.token);
+        //   this.$router.push(S"/home");
+        // });
+      // });
     },
   },
 };
@@ -99,7 +105,7 @@ export default {
 }
 .siginuser {
   margin-top: 140px;
-  opacity:0.5;
+  opacity: 0.5;
 }
 .siginput {
   color: #fff;
@@ -110,8 +116,7 @@ p {
   color: rgb(175, 175, 175);
   text-align: center;
 }
-.van-cell{
+.van-cell {
   margin-top: 10px;
 }
-
 </style>

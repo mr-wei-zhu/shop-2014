@@ -1,24 +1,18 @@
 <template>
   <div id="cart">
-    <div class="body">
-      <!-- 头部 -->
-      <div class="carthead">
-        <div class="cart-head-up">
-          <strong>购物车</strong><span @click="Regulate">管理</span>
-        </div>
-        <div class="cart-head-dowm">
-          <p>共{{ number }}件宝贝</p>
-        </div>
-      </div>
+    <div class="cartbody">
+      <Navbar id="navbar">
+        <template v-slot:title>购物街</template>
+      </Navbar>
 
       <!-- 购物车中心部分 -->
-      <div class="cartUl" v-for="(item, index) in arr" :key="index">
+      <div class="cartLi" v-for="item in arr" :key="item.id">
         <div class="shopcheck">
-          <!-- 按钮1 -->
+          <!-- 店铺按钮 -->
           <van-checkbox
             class="cart-checkboox2"
-            v-model="item.isChecked"
-            @click="checkGropAll(item)"
+            v-model="item.checked"
+            @click="checkShop(item)"
           ></van-checkbox>
 
           <div class="shopInfo">
@@ -27,10 +21,10 @@
           </div>
         </div>
 
-        <!-- 商品 -->
+        <!-- 单个商品 -->
         <van-swipe-cell
           class="cartkist"
-          v-for="(item2, index2) in item.list"
+          v-for="(item2, index2) in item.productList"
           :key="index2"
         >
           <van-card
@@ -42,11 +36,11 @@
             thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
           >
           </van-card>
-          <!-- 按钮2 v-model="item.result" -->
+          <!-- 商品按钮 -->
           <van-checkbox
             class="cart-checkboox"
-            v-model="item.result"
-            @click="checkGroup(item)"
+            v-model="item2.isChecked"
+            @click="ischeck(item, item2)"
           ></van-checkbox>
 
           <template #right>
@@ -60,121 +54,140 @@
         </van-swipe-cell>
       </div>
     </div>
-    <!-- 结算 -->
-    <!-- <div class="pay">
-      <van-checkbox @click="checkAll" v-model="isCheckAll">全选</van-checkbox>
-      <div class="pay-number">
-        <p>
-          合计：<span>￥{{ money }}</span>
-        </p>
-        <van-button round type="info" color="#FF8040" class="pay-buttom"
-          >结算({{ number }})</van-button
-        >
-      </div>
-    </div> -->
-    <!-- <div class="kong"></div> -->
     <van-submit-bar
       :price="3050"
-      button-text="提交订单"
+      button-text="结算"
       @submit="onSubmit"
       placeholder
     >
-      <van-checkbox v-model="checked">全选</van-checkbox>
-      <template #tip>
-        你的收货地址不支持同城送,
-        <span @click="onClickEditAddress">修改地址</span>
-      </template>
+      <van-checkbox v-model="isCheckAll" @click="checkAll">全选</van-checkbox>
     </van-submit-bar>
     <tabbar class="table"></tabbar>
   </div>
 </template>
 <script>
-import Navtbar from "../common/Navtbar/Navtbar.vue";
+import Navbar from "views/common/Navtbar/Navtbar.vue";
 import Tabbar from "../common/Tabbar/tabbar.vue";
 export default {
   props: [],
-  components: { Navtbar, Tabbar },
+  components: { Navbar, Tabbar },
   name: "",
   data() {
     return {
-      number: "99",
-      money: "99",
+      // money: "99",
       // 数据
       arr: [
-        { isChecked: false, result: [], list: [{ title: "11" }, { B: "22" }] },
-        { isChecked: false, result: [], list: [{ title: "11" }, { B: "22" }] },
-        { isChecked: false, result: [], list: [{ title: "11" }, { B: "22" }] },
-
+        {
+          id: 1,
+          shopname: "AAA", //  店铺名
+          checked: false, // 商店选择的状态
+          checkedCount: 0, // 此商店被选择的商品数量
+          productList: [
+            {
+              isChecked: false, // 商品选择状态
+              title: "2019款macbook/苹果/MF893/A国航笔记本", // 产品名
+              desc: "15寸/2.3/8G/256/土豪金/标准套餐",
+              price: 10200, // 价格
+              num: 1, // 数量
+            },
+            {
+              isChecked: false, // 商品选择状态
+              title: "2019款macbook/苹果/MF893/A国航笔记本", // 产品名
+              desc: "15寸/2.3/8G/256/土豪金/标准套餐",
+              price: 10200, // 价格
+              num: 1, // 数量
+            },
+          ],
+        },
       ],
 
-      // 全选款
-      isCheckAll: false,
-      //  店铺名
-      shopname: "AAA",
+      isCheckAll: false, // 是否全选
+      allPrice: 0, // 所有价格
+      allShops: 0, // 被选中的商店数量
+      allCount: 0, // 被选中的产品数量
     };
   },
+
   //方法 函数写这里
   methods: {
-    // 管理
-    Regulate() {
-      console.log(1);
-    },
-    // 全選
-    checkAll() {
-      console.log(1);
-      // this.isCheckAll=!this.isCheckAll;
+    //  选中单个商品
+    ischeck(item, item2) {
+      // console.log(item2.isChecked);
+      console.log(item.productList);
 
-      if (this.isCheckAll) {
-        this.arr.forEach((item) => {
-          item.result = [];
-          item.isChecked = this.isCheckAll;
-          item.list.forEach((j) => {
-            item.result.push(j.title);
-          });
-        });
-      } else {
-        this.arr.forEach((item) => {
-          item.isChecked = this.isCheckAll;
-          item.list.forEach((j) => {
-            item.result = [];
-          });
-        });
-      }
-    },
-    // 店铺按钮
-    checkGropAll(item) {
-      // item.isChecked=!this.isChecked
-      if (item.isChecked) {
-        item.result = [];
-        item.list.forEach((i) => {
-          item.result.push(i.title);
-        });
-      } else {
-        item.list.forEach((i) => {
-          item.result = [];
-        });
-      }
-      let val = this.arr.every((i) => i.isChecked);
-      if (val) {
-        this.isCheckAll = true;
-      } else {
-        this.isCheckAll = false;
-      }
+
+      let OK = item.productList.every((item) => {
+        console.log(item.isChecked);
+        return item.isChecked == 'ture';
+      });
+      // console.log(OK);
     },
 
-    // 每个商品的按钮
-    checkGroup(item) {
-      if (item.result.length == item.list.length) {
-        item.isChecked = true;
+    // 修改单个商品的true
+    _checkTrue(item, item2) {
+      if (item.checkedCount == item.productList.length) {
+        item.checked = true;
       } else {
-        item.isChecked = false;
+        return "";
       }
-      let val = this.arr.every((item) => isChecked);
-      if (val) {
-        this.isCheckAll = true;
+      if (item.checked) {
+        if (++this.allShops === this.cartInfoList.length) {
+          this.isCheckAll = true;
+        } else {
+          this.isCheckAll = false;
+        }
       } else {
-        this.isCheckAll = false;
+        return "";
       }
+    },
+    // 修改单个商品的 false
+    _checkFalse(item, item2) {
+      item2.isChecked = false;
+      --item.checkedCount;
+      if (item.checked) {
+        // 如果店铺是被选中的，更改店铺选中状态
+        item.checked = false;
+        --this.allShops; // 商店数减一
+      }
+
+      // 全选状态为false
+      this.isCheckAll = false;
+    },
+
+    // 选择整个商店的商品
+    checkShop(item) {
+      item.checked ? this._shopTrue(item) : this._shopFalse(item);
+    },
+    // 遍历商店每个商品,状态为false的改变为true,又在_checkTrue()方法中将商店状态改为true
+    _shopTrue(item) {
+      item.productList.forEach((pro) => {
+        if (pro.isChecked === false) {
+          this._checkTrue(item, pro);
+        } else {
+          return "";
+        }
+        pro.isChecked === false ? this._checkTrue(item, pro) : "";
+      });
+    },
+    _shopFalse(item) {
+      item.productList.forEach((pro) => {
+        // 同上
+        if (pro.isChecked === true) {
+          this._checkFalse(item, pro);
+        } else {
+          return "";
+        }
+      });
+    },
+  },
+
+  watch: {
+    arr: {
+      deep: true,
+      immediate: true,
+      handler(val, oldval) {
+        // console.log(666666666666);
+      },
     },
   },
 };
@@ -184,17 +197,26 @@ export default {
   margin: 0;
   padding: 0;
 }
-.carthead {
+#cart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#cart .carthead {
   height: 76px;
   width: 100%;
+  /* display: flex; */
 }
-#cart {
-  padding: 0 7px;
+
+.cartbody {
+  /* padding: 0 7px; */
   /* height:calc(100% - 150px); */
   /* width: 100%; */
   /* height: 100%; */
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  overflow-y: scroll;
   background: rgb(243, 243, 243);
 }
 
@@ -288,7 +310,7 @@ button {
 .shopInfo {
   padding-top: 9px;
 }
-.cartUl {
+.cartLi {
   background: #fff;
   margin-bottom: 7px;
   border-radius: 17px;
@@ -298,8 +320,8 @@ button {
   margin-bottom: 50px;
 }
 
-.table{
+.table {
   /* height: 84px; */
-  margin-top: 84px;
+  margin-top: 50px;
 }
 </style>
