@@ -20,6 +20,11 @@
         name="用户名"
         label="用户名"
         placeholder="用户名"
+        :rules="[
+          { required: true, message: '请输入正确内容' },
+          { tigger: 'blur' },
+          { validator, message: '长度为4~12位' },
+        ]"
       />
       <van-field
         v-model="siginForm.password"
@@ -27,6 +32,10 @@
         name="密码"
         label="密码"
         placeholder="密码"
+        :rules="[
+          { required: true, message: '请输入正确内容' },
+          { tigger: 'blur' },{pattern,message:'长度为6~14位'}
+        ]"
       />
       <div style="margin: 16px" class="siginbuttombox">
         <van-button
@@ -54,31 +63,18 @@ export default {
         username: "",
         password: "",
       },
-      // 验证规则
-      siginFormRules: {
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          {
-            min: 3,
-            max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
-          },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 15,
-            message: "长度在 6 到 15 个字符",
-            trigger: "blur",
-          },
-        ],
-      },
+      //验证密码用的
+      pattern:/\w{6,14}/    
     };
   },
 
   methods: {
+    // 验证用户名字规则
+    validator(val) {
+      //验证用户名用的函数
+
+      return /\S{4,12}/.test(val);
+    },
     onsubmit(values) {
       console.log(1);
     },
@@ -106,12 +102,6 @@ export default {
       //   }
       //   Notify({ type: "primary", message: "注册成功" });
       //   window.sessionStorage.setItem("token", res.data.token);
-      
-  
-      this.$router.push({
-        name:'login',
-        query:{ username:this.siginForm.username}
-      });
 
       // });
       // });
