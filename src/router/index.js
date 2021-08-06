@@ -8,7 +8,7 @@ const Category = () => import('../views/classify/Category.vue')
 const Info = () => import('../views/info/Info.vue')
 
 
-const Cart = () =>import('../views/cart/cart.vue')
+const Cart = () => import('../views/cart/cart.vue')
 const Set = () => import('../views/set/Set.vue')
 const Shop = () => import('../views/shop/Shop.vue')
 const Vip = () => import('../views/vip/Vip.vue')
@@ -39,7 +39,7 @@ const routes = [
     // 登录
     path: '/login',
     component: Login,
-    name:'login'
+    name: 'login'
 
   },
   {
@@ -47,6 +47,7 @@ const routes = [
     path: '/sigin',
     component: Sigin
   },
+  // 分类
   {
     path: '/classify',
     component: Category
@@ -68,13 +69,13 @@ const routes = [
   },
   {
     // vip
-    path:'/vip',
-    component:Vip
+    path: '/vip',
+    component: Vip
   },
   {
     // 购物车
-    path:'/cart',
-    component:Cart
+    path: '/cart',
+    component: Cart
   }
 
 ]
@@ -83,30 +84,38 @@ const router = createRouter({
   routes: routes,
 })
 
-router.beforeEach((to,from,next)=>{
-  if(to.path == '/login'){
-    next()
-    return
-  }
-  if(to.path == "/home"){
-    next()
-    return
-  }
-  if(to.path == "/users"){
-    next()
-    return
-  }
-  if(to.path == "/sigin"){
-    next()
-    return
-  }
-  let token = window.sessionStorage.getItem('token')
-  if(token){
-    next()
-    return
-  }
-  next('login')
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path == '/login') {
+//     next()
+//     return
+//   }
+//   if (to.path == '/classify') {
+//     next()
+//     return
+//   }
+//   if (to.path == '/detail/:id') {
+//     next()
+//     return
+//   }
+//   if (to.path == "/home") {
+//     next()
+//     return
+//   }
+//   if (to.path == "/users") {
+//     next()
+//     return
+//   }
+//   if (to.path == "/sigin") {
+//     next()
+//     return
+//   }
+//   let token = window.sessionStorage.getItem('token')
+//   if (token) {
+//     next()
+//     return
+//   }
+//   next('login')
+// })
 
 
 export default router

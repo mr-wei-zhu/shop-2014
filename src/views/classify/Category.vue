@@ -5,21 +5,25 @@
     </Navtbar>
 
     <van-tree-select
-      :items="classifymenu"
-      v-model:main-active-index="activeIndex"
-      @click="getClassifyList(activeIndex)"
+      :items="items"
+      v-model:active-id="activeId"
+      v-model:main-active-index="items.activeId"
+      @click-nav="onNavClick(items.activeId)"
     >
       <template #content>
-        <!-- <van-image
-          v-if="activeIndex === 0"
-          src="https://img.yzcdn.cn/vant/apple-1.jpg"
-        /> -->
-        <van-grid :border="false" :column-num="3">
-          <!-- <van-grid-item>
-            <van-image :src="item.img" :key="item" v-for="item in classifymenu" />
-          </van-grid-item>
-  -->
-        </van-grid>
+        <ul class="right-content">
+          <li>
+            <van-grid clickable :column-num="3" :gutter="10">
+              <van-grid-item
+                :icon="item.image"
+                :text="item.title"
+                :url="item.link"
+                :key="sort"
+                v-for="(item, sort) in classifylist"
+              />
+            </van-grid>
+          </li>
+        </ul>
       </template>
     </van-tree-select>
     <tabbar></tabbar>
@@ -28,52 +32,62 @@
 
 <script>
 import axios from "axios";
-import tabbar from "../common/Tabbar/tabbar.vue";
+import Tabbar from "../common/Tabbar/tabbar.vue";
 import Navtbar from "../common/Navtbar/Navtbar.vue";
 export default {
   data() {
     return {
       // 分类列表导航菜单
-      classifymenu: [],
+      items: [],
       // 分类数据列表
       classifylist: [],
+      activeId: 3627,
     };
   },
-  components: { tabbar, Navtbar },
-
+  components: { Tabbar, Navtbar },
   created() {
+    // 获取左侧导航菜单的数据
     this.getClassifyMenu();
     axios.get("/api/getData").then((res) => {
       console.log(res);
     });
+    // 默认渲染"正在流行"的数据
+    this.getClassifylist(3627);
   },
   methods: {
     getClassifyMenu() {
       axios.get(`http://152.136.185.210:7878/api/m5/category`).then((res) => {
         console.log(res);
-        this.classifymenu = res.data.data.category.list;
-        this.classifymenu.forEach((item) => {
+        this.items = res.data.data.category.list;
+
+        this.items.forEach((item) => {
           item.text = item.title;
-          item.activeIndex = item.maitKey;
+          item.activeId = item.maitKey;
         });
-        console.log(this.classifymenu);
+        // console.log(this.items);
       });
     },
-    getClassifyList(activeIndex) {
-      console.log(activeIndex);
-      // axios
-      //   .get(
-      //     `http://152.136.185.210:7878/api/m5/subcategory?maitKey=${maitKey}`
-      //   )
-      //   .then((res) => {
-      //     console.log(res);
-      //   });
+    onNavClick(index) {
+      console.log(index);
+      // const activeId = this.items[index].activeId;
+      this.getClassifylist(this.items[index].activeId);
+    },
+    getClassifylist(activeId) {
+      axios
+        .get(
+          `http://152.136.185.210:7878/api/m5/subcategory?maitKey=${activeId}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.classifylist = res.data.data.list;
+          console.log(this.classifylist);
+        });
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 #navbar {
   background: pink;
 }
@@ -81,10 +95,12 @@ export default {
   width: 100%;
   background-color: rgb(248, 135, 154);
   border: none;
-  height: 60px;
+  height: 50px;
+  font-size: 18px;
 }
 .van-tree-select {
-  height: 150vw !important;
+  height: 180vw !important;
+  margin: 0;
 }
 .van-tree-select__nav {
   flex: none;
@@ -94,5 +110,23 @@ export default {
   height: 13vw;
   width: 1vw;
   background-color: rgb(248, 135, 154);
+}
+
+.van-icon__image {
+  width: 4em;
+  height: 4em;
+}
+.van-grid-item__text {
+  font-size: 12px;
+}
+.van-badge__wrapper {
+  color: #000 !important;
+  font-size: 14px;
+}
+.active {
+  color: pink;
+}
+.van-grid-item__content--center {
+  height: 105px;
 }
 </style>
