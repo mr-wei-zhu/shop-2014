@@ -105,6 +105,8 @@ this.$router.push('/set')
       this.$router.push('vip')
     }
   },
+
+  // 登录 name
   //    created() {
  
   //   this.usermane = this.$route.query.uaermane;

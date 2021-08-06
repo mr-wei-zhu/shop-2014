@@ -115,10 +115,9 @@ export default {
       // console.log(item2.isChecked);
       console.log(item.productList);
 
-
       let OK = item.productList.every((item) => {
         console.log(item.isChecked);
-        return item.isChecked == 'ture';
+        return item.isChecked == "ture";
       });
       // console.log(OK);
     },

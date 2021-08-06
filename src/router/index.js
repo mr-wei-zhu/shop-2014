@@ -32,8 +32,8 @@ const routes = [
   {
     // 我的
     path: '/users',
-    component: Users
-
+    component: Users,
+    name:'users'
   },
   {
     // 登录
@@ -70,43 +70,57 @@ const routes = [
     // vip
     path:'/vip',
     component:Vip
-  },
+  }, 
   {
-    // 购物车
+    //   购物车 路由独享的守卫
     path:'/cart',
-    component:Cart
+    component:Cart,
+    beforeEnter: (to, from, next) => {
+      let token = window.sessionStorage.getItem("token");
+      if (token) {
+        next();
+        return;
+      }else{
+        next(false)
+      }
+    },
+  
   }
 
 ]
+
+
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes,
 })
 
-router.beforeEach((to,from,next)=>{
-  if(to.path == '/login'){
-    next()
-    return
-  }
-  if(to.path == "/home"){
-    next()
-    return
-  }
-  if(to.path == "/users"){
-    next()
-    return
-  }
-  if(to.path == "/sigin"){
-    next()
-    return
-  }
-  let token = window.sessionStorage.getItem('token')
-  if(token){
-    next()
-    return
-  }
-  next('login')
-})
+
+// router.beforeEach((to,from,next)=>{
+//   if(to.path == '/login'){
+//     next()
+//     return
+//   }
+//   if(to.path == "/home"){
+//     next()
+//     return
+//   }
+//   if(to.path == "/users"){
+//     next()
+//     return
+//   }
+//   if(to.path == "/sigin"){
+//     next()
+//     return
+//   }
+//   let token = window.sessionStorage.getItem('token')
+//   if(token){
+//     next()
+//     return
+//   }
+//   next('login')
+// })
 
 
 export default router
