@@ -38,7 +38,8 @@ const routes = [
   {
     // 登录
     path: '/login',
-    component: Login
+    component: Login,
+    name:'login'
 
   },
   {
@@ -81,4 +82,31 @@ const router = createRouter({
   history: createWebHistory(),
   routes: routes,
 })
+
+router.beforeEach((to,from,next)=>{
+  if(to.path == '/login'){
+    next()
+    return
+  }
+  if(to.path == "/home"){
+    next()
+    return
+  }
+  if(to.path == "/users"){
+    next()
+    return
+  }
+  if(to.path == "/sigin"){
+    next()
+    return
+  }
+  let token = window.sessionStorage.getItem('token')
+  if(token){
+    next()
+    return
+  }
+  next('login')
+})
+
+
 export default router

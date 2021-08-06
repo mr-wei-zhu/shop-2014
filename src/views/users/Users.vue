@@ -12,8 +12,8 @@
       <!-- 登录注册按钮 -->
       <div class="phone">
         <div class="phoneup">
-          <span class="login" @click="login">登录/</span>
-          <span class="sinin" @click="sigin">注册</span>
+          <span class="login" @click="login">{{usermane}}</span>
+         
         </div>
         <div class="phonedowm">
           <img src="~assets/img/user/phone.svg" alt="手机" />
@@ -79,8 +79,11 @@ export default {
   data() {
     return {
       list: [],
+      usermane:'登录'
     };
   },
+
+ 
   //方法 函数写这里
   methods: {
     login() {
@@ -102,6 +105,11 @@ this.$router.push('/set')
       this.$router.push('vip')
     }
   },
+  //    created() {
+ 
+  //   this.usermane = this.$route.query.uaermane;
+
+  // },
 };
 </script>
 

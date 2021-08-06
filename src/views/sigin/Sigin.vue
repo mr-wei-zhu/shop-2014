@@ -1,5 +1,13 @@
 <template>
   <div id="sigin">
+    <van-nav-bar
+      class="loginhead"
+      title=""
+      left-text=""
+      right-text=""
+      left-arrow
+      @click-left="gobacklogin"
+    />
     <van-form
       @submit="onSubmit"
       class="siginuser"
@@ -20,7 +28,7 @@
         label="密码"
         placeholder="密码"
       />
-      <div style="margin: 16px">
+      <div style="margin: 16px" class="siginbuttombox">
         <van-button
           round
           block
@@ -28,6 +36,7 @@
           native-type="submit"
           class="siginput"
           @click="sigin"
+          color="#f391a9"
           >注册</van-button
         >
       </div>
@@ -36,7 +45,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
@@ -73,22 +82,38 @@ export default {
     onsubmit(values) {
       console.log(1);
     },
+    // 头部导航返回键
+    gobacklogin() {
+      console.log(1);
+      this.$router.push("/login");
+    },
     sigin() {
       // this.$refs.siginFormRef.value(async (val) => {
       //   if (!val) return;
       console.log(this.siginForm);
-        axios.post("/api/addAction",{username:this.siginForm.username,password:this.siginForm.password}).then((res) => {
-          console.log(res);
-        });
-        // this.$http.sigin(this.siginForm, (res) => {
-        //   if (res.meat.status != 200) {
-        //     Notify("注册失败");
-        //     return;
-        //   }
-        //   Notify({ type: "primary", message: "注册成功" });
-        //   window.sessionStorage.setItem("token", res.data.token);
-        //   this.$router.push(S"/home");
-        // });
+      axios({
+        method: "post",
+        url: "/api/addAction",
+        params: this.siginForm,
+      }).then((res) => {
+        console.log(res);
+      });
+
+      // this.$http.sigin(this.siginForm, (res) => {
+      //   if (res.meat.status != 200) {
+      //     Notify("注册失败");
+      //     return;
+      //   }
+      //   Notify({ type: "primary", message: "注册成功" });
+      //   window.sessionStorage.setItem("token", res.data.token);
+      
+  
+      this.$router.push({
+        name:'login',
+        query:{ username:this.siginForm.username}
+      });
+
+      // });
       // });
     },
   },
@@ -96,16 +121,8 @@ export default {
 </script>
 
 <style>
-#sigin {
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  background: url("https://z3.ax1x.com/2021/08/02/fCwEjJ.jpg") no-repeat;
-  background-size: 100% 100%;
-}
 .siginuser {
   margin-top: 140px;
-  opacity: 0.5;
 }
 .siginput {
   color: #fff;
@@ -118,5 +135,15 @@ p {
 }
 .van-cell {
   margin-top: 10px;
+}
+.siginbuttombox {
+  position: relative;
+}
+.siginput {
+  color: #fff;
+  background: rgb(44, 94, 233);
+  width: 60%;
+  position: absolute;
+  left: 20%;
 }
 </style>
