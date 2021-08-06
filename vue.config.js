@@ -22,7 +22,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/api": {
-                target: "http://localhost:3000/",//接口的域名
+                target: "http://120.27.146.2:1004",//接口的域名
                 pathRewrite: {
                     "^/api": ""//需要将/api重写为''
                 },

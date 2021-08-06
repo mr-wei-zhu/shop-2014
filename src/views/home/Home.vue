@@ -3,13 +3,16 @@
     <Navbar id="navbar">
       <template v-slot:title>购物街</template>
     </Navbar>
+
     <van-search
       v-model="value"
       placeholder="请输入搜索关键词"
       background="pink"
       shape="round"
     />
+
     <home-swiper :banner="banner"></home-swiper>
+    
     <van-grid :gutter="5" :border="false">
       <van-grid-item v-for="value in homenav" :key="value" class="nav">
         <div class="nva_div">
