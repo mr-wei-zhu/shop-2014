@@ -12,7 +12,6 @@
     <van-form
       @submit="onSubmit"
       class="loginuser"
-      :rules="loginFormRules"
       :model="loginForm"
       ref="loginFormRef"
     >
@@ -86,12 +85,14 @@ export default {
         // Notify({ type: "primary", message: "登录成功" });
 
         window.sessionStorage.setItem("token", res.data.data[0]._id);
+        
 
-        this.$router.push("/home");
-        // this.$router.push({
-        //   name:'users',
-        //   query:{ username:this.siginForm.username}
-        // });
+// console.log(this.loginForm.username);
+        // this.$router.push("/home");
+        this.$router.push({
+          name:'users',
+          query:{ username:this.loginForm.username}
+        });
 
         //   });
       });

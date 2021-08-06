@@ -81,7 +81,7 @@ const routes = [
         next();
         return;
       }else{
-        next(false)
+        next('/login')
       }
     },
   

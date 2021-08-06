@@ -7,6 +7,7 @@
       right-text=""
       left-arrow
       @click-left="gobacklogin"
+      
     />
     <van-form
       @submit="onSubmit"
@@ -93,18 +94,8 @@ export default {
         params: this.siginForm,
       }).then((res) => {
         console.log(res);
+         this.$router.push("/login");
       });
-
-      // this.$http.sigin(this.siginForm, (res) => {
-      //   if (res.meat.status != 200) {
-      //     Notify("注册失败");
-      //     return;
-      //   }
-      //   Notify({ type: "primary", message: "注册成功" });
-      //   window.sessionStorage.setItem("token", res.data.token);
-
-      // });
-      // });
     },
   },
 };
