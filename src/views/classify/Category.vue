@@ -43,6 +43,9 @@ export default {
 
   created() {
     this.getClassifyMenu();
+    axios.get("/api/getData").then((res) => {
+      console.log(res);
+    });
   },
   methods: {
     getClassifyMenu() {

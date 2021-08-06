@@ -70,9 +70,34 @@
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" />
       <van-action-bar-icon icon="shop-o" text="店铺" />
-      <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" />
+      <van-action-bar-button
+        color="#be99ff"
+        type="warning"
+        text="加入购物车"
+        @click="addcart"
+      />
       <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
     </van-action-bar>
+    <van-dialog
+      v-model:show="show"
+      title="添加商品"
+      show-cancel-button
+      class="addcart"
+      @confirm="qaddcart"
+    >
+      <p>{{ detailData.skuInfo.title }}</p>
+      <div>
+        <img :src="detailData.itemInfo.topImages[0]" alt="" />
+      </div>
+    </van-dialog>
+    <!-- <van-popup
+      v-model:show="show"
+      closeable
+      position="bottom"
+      :style="{ height: '40%' }"
+    >
+      是否加入到购物车</van-popup
+    > -->
   </div>
 </template>
 <script>
@@ -81,19 +106,23 @@ import DetailBaseInfo from "./DetailBaseInfo.vue";
 import DetailShopInfo from "./DetailShopInfo.vue";
 import Coupons from "./coupons.vue";
 import Detamain from "./Detamain.vue";
+import Addcart from "./addcart.vue";
+
 export default {
   props: [],
-  components: { DetailBaseInfo, DetailShopInfo, Coupons, Detamain },
+  components: { DetailBaseInfo, DetailShopInfo, Coupons, Detamain, Addcart },
 
   name: "detail",
   data() {
     return {
+      goodsg: [],
       id: "",
       detailData: null,
       swiper: null,
       goods: {},
       shop: {},
       detailInfo: {},
+      show: false,
     };
   },
   created() {
@@ -101,6 +130,7 @@ export default {
     getDetail(this.id).then((res) => {
       console.log(res);
       const data = res.data.result;
+      this.goodsg = res.data;
       this.detailData = data;
       //轮播图
       this.swiper = data.itemInfo.topImages;
@@ -113,7 +143,42 @@ export default {
     });
   },
   //方法 函数写这里
-  methods: {},
+  methods: {
+    addcart() {
+      console.log(this.goodsg);
+      this.show = !this.show;
+    },
+    qaddcart() {
+      // Bus.$emit("addgoods", this.goodsg);
+      // axios({
+      //   method: "post",
+      //   url: "/api/addgoods",
+      //   params: {
+      //     iid: this.goodsg.iid,
+      //     id: window.sessionStorage.getItem("id"),
+      //   },
+      // });
+      let arr = [];
+      let data = window.localStorage.getItem("di");
+      if (!data) {
+        console.log('没东西');
+        arr.push(this.goodsg);
+        window.localStorage.setItem("di", JSON.stringify(arr));
+      } else {
+        console.log('有东西');
+        data = JSON.parse(data);
+        console.log(data);
+        data.push(this.goodsg)
+        window.localStorage.setItem("di", JSON.stringify(data));
+        // window.localStorage.setItem("di", JSON.stringify(arr));
+
+        // window.localStorage.setItem("di", JSON.stringify(this.goodsg));
+      }
+      // console.log(JSON.parse(data));
+      // window.localStorage.setItem("di", JSON.stringify(this.goodsg));
+      // this.$router.push('/cart')
+    },
+  },
   //计算属性
   computed: {},
 };
@@ -142,5 +207,22 @@ export default {
 }
 .van-swipe-item img {
   width: 100%;
+}
+.addcart img {
+  width: 100%;
+  margin-top: -30px;
+}
+.addcart p {
+  height: 70px;
+  margin: 10px 15px;
+  font-size: 14px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.addcart div {
+  height: 200px;
+  overflow: hidden;
 }
 </style>

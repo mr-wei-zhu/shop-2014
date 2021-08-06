@@ -12,7 +12,6 @@
         name="用户名"
         label="用户名"
         placeholder="用户名"
-      
       />
       <van-field
         v-model="loginForm.password"
@@ -37,6 +36,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
         password: "123456",
       },
       // 验证规则
-       loginFormRules: {
+      loginFormRules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
@@ -69,31 +69,25 @@ export default {
     };
   },
   methods: {
-    onSubmit(values) {
-      console.log("submit", values);
+    onSubmit() {
+      // console.log("submit", values);
     },
-    login(){
-      this.$refs.loginFormRef.values(async(val)=>{
-        if(!val)return;
-        this.$http.login(this.loginForm,(res)=>{
-          if(res.meat.status != 200){
-          Notify('登录失败');
-          return;
-          }
-          Notify({ type: 'primary', message: '登录成功' });
-          window.sessionStorage.setItem('token',res.data.token);
-          this.$router.push("/home");
-        })
-      })
+    login() {
+      axios({
+        method: "post",
+        url: "/api/login",
+        params: this.loginForm,
+      }).then((res) => {
+        console.log(res);
+      });
     },
-    sigin(){
-      this.$router.push("/sigin")
-    }
+    sigin() {
+      this.$router.push("/sigin");
+    },
   },
 };
 </script>
 <style >
-
 #login {
   overflow: hidden;
   width: 100vw;
@@ -103,7 +97,7 @@ export default {
 }
 .loginuser {
   margin-top: 140px;
-  opacity:0.5;
+  opacity: 0.5;
 }
 .loginput {
   color: #fff;
@@ -114,8 +108,7 @@ p {
   color: rgb(175, 175, 175);
   text-align: center;
 }
-.van-cell{
+.van-cell {
   margin-top: 10px;
 }
-
 </style>

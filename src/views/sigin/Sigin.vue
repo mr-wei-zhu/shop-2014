@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -72,17 +73,12 @@ export default {
       console.log(1);
     },
     sigin() {
-      this.$refs.siginFormRules.values(async (val) => {
-        if (!val) return;
-        this.$http.sigin(this.siginForm, (res) => {
-          if (res.meat.status != 200) {
-            Notify("注册失败");
-            return;
-          }
-          Notify({ type: "primary", message: "注册成功" });
-          window.sessionStorage.setItem("token", res.data.token);
-          this.$router.push("/home");
-        });
+      axios({
+        method: "post",
+        url: "/api/addAction",
+        params: this.siginForm,
+      }).then((res) => {
+        console.log(res);
       });
     },
   },
@@ -99,7 +95,7 @@ export default {
 }
 .siginuser {
   margin-top: 140px;
-  opacity:0.5;
+  opacity: 0.5;
 }
 .siginput {
   color: #fff;
@@ -110,8 +106,7 @@ p {
   color: rgb(175, 175, 175);
   text-align: center;
 }
-.van-cell{
+.van-cell {
   margin-top: 10px;
 }
-
 </style>

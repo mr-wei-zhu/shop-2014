@@ -114,8 +114,13 @@
   </div>
 </template>
 <script>
+// import Bus from "../Bus";
 import Navtbar from "../common/Navtbar/Navtbar.vue";
 import Tabbar from "../common/Tabbar/tabbar.vue";
+
+import mitt from "mitt";
+import axios from 'axios';
+const emitter = mitt();
 export default {
   props: [],
   components: { Navtbar, Tabbar },
@@ -125,13 +130,19 @@ export default {
       number: "99",
       checked: true,
       money: "99",
+      goods: [],
     };
+  },
+  created() {
+    
   },
   //方法 函数写这里
   methods: {
     Regulate() {
       console.log(1);
     },
+    addgood(goods) {},
+    
   },
 };
 </script>
