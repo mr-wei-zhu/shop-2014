@@ -1,5 +1,14 @@
 <template>
   <div id="login">
+    <van-nav-bar
+      class="loginhead"
+      title=""
+      left-text=""
+      right-text="注册"
+      left-arrow
+      @click-left="goback"
+      @click-right="sigin"
+    />
     <van-form
       @submit="onSubmit"
       class="loginuser"
@@ -12,7 +21,10 @@
         name="用户名"
         label="用户名"
         placeholder="用户名"
-      
+        :rules="[
+          { required: true, message: '请输入正确内容' },
+          { tigger: 'blur' },
+        ]"
       />
       <van-field
         v-model="loginForm.password"
@@ -20,102 +32,108 @@
         name="密码"
         label="密码"
         placeholder="密码"
+        :rules="[
+          { required: true, message: '请输入正确内容' },
+          { tigger: 'blur' },
+        ]"
       />
-      <div style="margin: 16px">
+      <div style="margin: 16px" class="buttombox">
         <van-button
           round
           block
           type="default"
           native-type="submit"
           class="loginput"
+          color="#f391a9"
           @click="login"
           >登录</van-button
         >
       </div>
     </van-form>
-    <p @click="sigin">没有账户？快来注册吧</p>
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       // 默认值
       loginForm: {
-        username: "迪迪",
+        username: "1111",
         password: "123456",
       },
       // 验证规则
-       loginFormRules: {
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          {
-            min: 3,
-            max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
-          },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 15,
-            message: "长度在 6 到 15 个字符",
-            trigger: "blur",
-          },
-        ],
-      },
+      show: false,
     };
   },
+  created() {
+ 
+  },
   methods: {
-    onSubmit(values) {
-      console.log("submit", values);
+    login() {
+      // this.$refs.loginFormRef.validate(async (val) => {
+      //   if (!val) return;
+      axios({
+        method: "post",
+        url: "/api/login",
+        params: this.loginForm,
+      }).then((res) => {
+        console.log(res);
+        // if (res.data.Status != 200) {
+
+        // }
+        window.sessionStorage.setItem("token", res.data.data[0]._id);
+
+        this.$router.push("/home");
+        // this.$router.push({
+        //   name:'users',
+        //   query:{ username:this.siginForm.username}
+        // });
+
+        //   });
+      });
     },
-    login(){
-      this.$refs.loginFormRef.values(async(val)=>{
-        if(!val)return;
-        this.$http.login(this.loginForm,(res)=>{
-          if(res.meat.status != 200){
-          Notify('登录失败');
-          return;
-          }
-          Notify({ type: 'primary', message: '登录成功' });
-          window.sessionStorage.setItem('token',res.data.token);
-          this.$router.push("/home");
-        })
-      })
+    sigin() {
+      this.$router.push("/sigin");
     },
-    sigin(){
-      this.$router.push("/sigin")
-    }
+    // 头部导航
+    goback() {
+      console.log(1);
+      this.$router.push("/users");
+    },
   },
 };
 </script>
-<style >
 
+<style scoped>
 #login {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
-  background: url("https://z3.ax1x.com/2021/08/02/fCP3yq.gif") no-repeat;
+  background: url("https://z3.ax1x.com/2021/08/04/fEqUK0.jpg") no-repeat;
   background-size: 100% 100%;
+}
+.van-nav-bar__text {
+  color: #111 !important;
+}
+.loginhead {
+  color: #111;
 }
 .loginuser {
   margin-top: 140px;
-  opacity:0.5;
+  /* opacity:0.5; */
+}
+.buttombox {
+  position: relative;
 }
 .loginput {
   color: #fff;
   background: rgb(44, 94, 233);
+  width: 60%;
+  position: absolute;
+  left: 20%;
 }
-p {
-  font-size: 12px;
-  color: rgb(175, 175, 175);
-  text-align: center;
-}
-.van-cell{
+.van-cell {
   margin-top: 10px;
 }
-
 </style>

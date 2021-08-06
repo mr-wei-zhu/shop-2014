@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button } from 'vant';
 import 'vant/lib/index.css';
 import router from './router/index'
-import vant from 'vant';
+import vant from 'vant';    
 // import rem from './assets/js/rem.js'
 
 const app = createApp(App)

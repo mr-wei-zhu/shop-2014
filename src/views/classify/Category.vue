@@ -10,8 +10,8 @@
       v-model:main-active-index="items.activeId"
       @click-nav="onNavClick(items.activeId)"
     >
-      <template #content>
-        <ul class="right-content">
+      <template #content >
+        <ul class="right-content" id="nav">
           <li>
             <van-grid clickable :column-num="3" :gutter="10">
               <van-grid-item
@@ -48,6 +48,9 @@ export default {
   created() {
     // 获取左侧导航菜单的数据
     this.getClassifyMenu();
+    axios.get("/api/getData").then((res) => {
+      console.log(res);
+    });
     // 默认渲染"正在流行"的数据
     this.getClassifylist(3627);
   },
@@ -100,9 +103,11 @@ export default {
   margin: 0;
 }
 .van-tree-select__nav {
-  flex: none;
+  width: 50px;
 }
-
+/* #nav{
+  width: 300px;
+} */
 .van-sidebar-item--select::before {
   height: 13vw;
   width: 1vw;

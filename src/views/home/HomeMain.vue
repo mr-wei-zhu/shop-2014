@@ -1,5 +1,11 @@
 <template>
-  <van-tabs v-model:active="active" @click-tab="onClickTab">
+  <van-tabs
+    v-model:active="active"
+    @click-tab="onClickTab"
+    sticky
+    animated
+    offset-top="40px"
+  >
     <van-tab
       v-for="(item, index) in title"
       :title="item"

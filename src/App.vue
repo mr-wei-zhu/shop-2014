@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <keep-alive exclude="detail">
-      <router-view></router-view>
-    </keep-alive>
-
+    <router-view #default="{ Component }">
+      <keep-alive exclude="detail">
+        <component :is="Component" v-if="$route.meta.keepAlive" />
+      </keep-alive>
+      <component :is="Component" v-if="!$route.meta.keepAlive" />
+    </router-view>
   </div>
 </template>
 

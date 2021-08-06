@@ -91,9 +91,26 @@
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" />
       <van-action-bar-icon icon="shop-o" text="店铺" />
-      <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" />
+      <van-action-bar-button
+        color="#be99ff"
+        type="warning"
+        text="加入购物车"
+        @click="addcart"
+      />
       <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
     </van-action-bar>
+    <van-dialog
+      v-model:show="show"
+      title="添加商品"
+      show-cancel-button
+      class="addcart"
+      @confirm="qaddcart"
+    >
+      <p>{{ detailData.skuInfo.title }}</p>
+      <div>
+        <img :src="detailData.itemInfo.topImages[0]" alt="" />
+      </div>
+    </van-dialog>
   </div>
 </template>
 <script>
@@ -109,6 +126,7 @@ export default {
   name: "detail",
   data() {
     return {
+      goodsg: [],
       id: "",
       detailData: null,
       swiper: null,
@@ -120,6 +138,7 @@ export default {
       set: [],
       active: "",
       commentlist: [],
+      show: false,
     };
   },
   created() {
@@ -128,6 +147,7 @@ export default {
       console.log(res);
       const data = res.data.result;
       this.detailData = data;
+      this.goodsg = res.data;
       //轮播图
       this.swiper = data.itemInfo.topImages;
       //获取商品信息
@@ -140,7 +160,6 @@ export default {
       this.detail = data.itemParams;
       this.set = this.detail.info.set;
       this.rule = this.detail.rule.tables;
-    
 
       console.log(this.rules);
       // console.log(this.set);
@@ -153,6 +172,49 @@ export default {
   methods: {
     goBack() {
       this.$router.push("/home");
+    },
+    addcart() {
+      console.log(this.goodsg);
+      this.show = !this.show;
+    },
+    qaddcart() {
+      // Bus.$emit("addgoods", this.goodsg);
+      // axios({
+      //   method: "post",
+      //   url: "/api/addgoods",
+      //   params: {
+      //     iid: this.goodsg.iid,
+      //     id: window.sessionStorage.getItem("id"),
+      //   },
+      // });
+      let arr = [];
+      let data = window.localStorage.getItem("di");
+      if (window.sessionStorage.getItem("token")) {
+        if (!data) {
+          console.log("没东西");
+          arr.push(this.goodsg);
+          console.log(this.goodsg);
+          console.log(arr);
+          window.localStorage.setItem("di", JSON.stringify(arr));
+        } else {
+          console.log("有东西");
+          data = JSON.parse(data);
+          console.log(data);
+          console.log(this.goodsg);
+          data.push(this.goodsg);
+          window.localStorage.setItem("di", JSON.stringify(data));
+        }
+
+        // window.localStorage.setItem("di", JSON.stringify(arr));
+
+        // window.localStorage.setItem("di", JSON.stringify(this.goodsg));
+      } else {
+        this.$router.push("/login");
+      }
+
+      // console.log(JSON.parse(data));
+      // window.localStorage.setItem("di", JSON.stringify(this.goodsg));
+      // this.$router.push('/cart')
     },
   },
   //计算属性
@@ -271,5 +333,22 @@ h3 {
 .commentbox span {
   font-size: 12px;
   color: rgb(146, 146, 146);
+}
+.addcart img {
+  width: 100%;
+  margin-top: -30px;
+}
+.addcart p {
+  height: 70px;
+  margin: 10px 15px;
+  font-size: 14px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.addcart div {
+  height: 200px;
+  overflow: hidden;
 }
 </style>
